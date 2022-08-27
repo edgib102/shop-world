@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import { Layer, Stage } from '@pixi/layers'
 
-import * as PLAYER from './player';
+import * as MOVEMENT from './movement';
 import * as WORLDGEN from './worldGen';
 
 
@@ -28,14 +28,19 @@ window.onload = () => {
 
     WORLDGEN.Init(foregroundContainer, groundLevel); //world asset generation
 
+
     
-    const player = PLAYER.Init(foregroundContainer, groundLevel); //player generation
+    const player = MOVEMENT.Init(foregroundContainer, groundLevel); //player generation
 
+    let massShopContainer = foregroundContainer.getChildAt(1);
 
+    console.log(massShopContainer.children)
     app.ticker.add(gameloop);
 
     function gameloop() {
-        PLAYER.Movement(player, foregroundContainer.getChildAt(1));
+        console.log(massShopContainer.children[10].position.x);
+
+        MOVEMENT.Movement(player, massShopContainer);
     }
 
     //for actions when the user resizes the broswer

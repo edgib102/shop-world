@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 
 let keys = {};
-const movementLimit2 = 2600;
+const movementLimit2 = 400;
 const movementScreenLimitBuffer = 25;
 const movementSpeed = 8;
 
@@ -12,7 +12,7 @@ DeclareMovementLimits();
 
 export function Init(foregroundContainer, groundLevel) {
 
-    if (true){
+    if (true){ //debug lines
         const debugLines = new PIXI.Graphics();
 
         let debugWidth = 1
@@ -28,11 +28,6 @@ export function Init(foregroundContainer, groundLevel) {
         foregroundContainer.addChild(debugLines);
 
     }
-
-
-
-
-
 
     const player = new PIXI.Graphics();
     
@@ -78,7 +73,7 @@ function keyUp(e) {
 
 
 
-export function Movement(player, shopContainer) {
+export function Movement(player, massShopContainer) {
     if (keys["68"] || keys["39"]) {
         player.x += movementSpeed;
     }else if (keys["65"] || keys["37"]){
@@ -88,12 +83,20 @@ export function Movement(player, shopContainer) {
 
     if (player.position.x >= rightLimit){ //if player position is more than the starting spawn point plus the movement limit
         player.position.x -= movementSpeed;
-        shopContainer.position.x -= movementSpeed;
+
+        for(let index = 0; index < massShopContainer.children.length; index++) {
+            massShopContainer.children[index].position.x -= movementSpeed;
+        }
+
+        
 
     }
     else if (player.x <= leftLimit){ //if player position is more than the starting spawn point minus the movement limit
         player.x += movementSpeed;
-        shopContainer.position.x += movementSpeed;
+
+        for(let index = 0; index < massShopContainer.children.length; index++) {
+            massShopContainer.children[index].position.x += movementSpeed;
+        }
 
     }
 }
