@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 
-export function Init(app, groundLevel, shopContainer){
+
+export function Init(foregroundContainer, groundLevel){
 
     const ground = new PIXI.Graphics();
     
@@ -8,7 +9,10 @@ export function Init(app, groundLevel, shopContainer){
     ground.drawRect(0, window.innerHeight - groundLevel, window.innerWidth, groundLevel); //
     ground.endFill();
 
-    app.stage.addChild(ground);
+    foregroundContainer.addChild(ground);
+
+    const shopContainer = new PIXI.Container();
+    foregroundContainer.addChild(shopContainer);
 
     const colors = [0xf2d3ac, 0xe7a76c, 0xc28462, 0x905b54, 0x513a3d, 0x6a422c, 0x996336]
 
@@ -20,13 +24,8 @@ export function Init(app, groundLevel, shopContainer){
             store.endFill();
 
             shopContainer.addChild(store);
-    }
-
-    //for actions when the user resizes the broswer
-    window.addEventListener('resize', () => {
-        shopContainer.position.y = window.innerHeight - window.innerHeight;
-        // console.log(shopContainer.position.y)
-    })    
+    } 
+    
 
 }
 
