@@ -8,14 +8,14 @@ const targetNumber = 700;
 
 export function Proximity_Interaction(player, massShopContainer, debugContainer){
 
-    let currentShop = FindClosest(player.position.x, massShopContainer);
+    let interactableElementContainer = FindClosest(player.position.x, massShopContainer);
 
-    currentShop.position.y = 100;
+    // interactableElementContainer.position.y = 100;
 
-    console.log(currentShop.position.x);
+    console.log(interactableElementContainer.position.x);
 
 
-    let interactableElementContainer = massShopContainer.getChildAt(1)
+    // let interactableElementContainer = massShopContainer.getChildAt(1)
 
     // console.log(Math.abs(player.position.x - massShopContainer.getChildAt(0).position.x))
 

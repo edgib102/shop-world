@@ -24,12 +24,14 @@ let result = null;
 // }
 
 var current = numbers[0]
-var diff = Math.abs (targetNumber - current);
+var difference = Math.abs (targetNumber - current);
 
 for (var val = 0; val < numbers.length; val++) {
+
     var newdiff = Math.abs (targetNumber - numbers[val]);
-    if (newdiff < diff) {
-        diff = newdiff;
+
+    if (newdiff < difference) {
+        difference = newdiff;
         current = numbers[val];
     }
 }
