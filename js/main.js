@@ -3,6 +3,7 @@ import { Layer, Stage } from '@pixi/layers'
 
 import * as MOVEMENT from './movement';
 import * as WORLDGEN from './worldGen';
+import * as INTERACTION from './interaction'
 
 
 const groundLevel = 100;
@@ -26,6 +27,7 @@ window.onload = () => {
     const foregroundContainer = new PIXI.Container();
     app.stage.addChild(foregroundContainer);
 
+
     WORLDGEN.Init(foregroundContainer, groundLevel); //world asset generation
 
 
@@ -34,17 +36,20 @@ window.onload = () => {
 
     let massShopContainer = foregroundContainer.getChildAt(1);
 
-    console.log(massShopContainer.children)
+    const debugContainer = new PIXI.Container();
+    app.stage.addChild(debugContainer)
+
     app.ticker.add(gameloop);
 
     function gameloop() {
-        console.log(massShopContainer.children[10].position.x);
+        INTERACTION.Proximity_Interaction(player, massShopContainer, debugContainer);
 
         MOVEMENT.Movement(player, massShopContainer);
     }
 
     //for actions when the user resizes the broswer
     const initalHeight = window.innerHeight;
+
     window.addEventListener('resize', () => {
         if (movementLimit > window.innerWidth){
             movementLimit = window.innerWidth

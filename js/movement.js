@@ -7,17 +7,13 @@ const movementSpeed = 8;
 
 let rightLimit = 0;
 let leftLimit = 0;
-DeclareMovementLimits();
-
 
 export function Init(foregroundContainer, groundLevel) {
 
-    if (true){ //debug lines
+    if (false){ //debug lines
         const debugLines = new PIXI.Graphics();
 
         let debugWidth = 1
-
-        console.log(screen.width/2)
 
         debugLines.beginFill(0xff0000);
         debugLines.drawRect(window.innerWidth/2 -debugWidth/2, 0, debugWidth, 1000) //centerline
@@ -39,17 +35,20 @@ export function Init(foregroundContainer, groundLevel) {
         150 //height
     );
 
-    player.position.x = window.innerWidth/2 - 100/2 //teleports player to the global coords
+    player.position.x = window.innerWidth/2 - player.width/2 //teleports player to the global coords
 
     player.endFill();
+
     
     foregroundContainer.addChild(player);
 
     window.addEventListener('resize', () => {
-        player.position.x = window.innerWidth/2 - (100/2)
+        player.position.x = window.innerWidth/2 - player.width/2
 
-        DeclareMovementLimits();
+        DeclareMovementLimits(player.width);
     });
+
+    DeclareMovementLimits(player.width);
 
     return player;
 
@@ -72,7 +71,6 @@ function keyUp(e) {
 }
 
 
-
 export function Movement(player, massShopContainer) {
     if (keys["68"] || keys["39"]) {
         player.x += movementSpeed;
@@ -88,8 +86,6 @@ export function Movement(player, massShopContainer) {
             massShopContainer.children[index].position.x -= movementSpeed;
         }
 
-        
-
     }
     else if (player.x <= leftLimit){ //if player position is more than the starting spawn point minus the movement limit
         player.x += movementSpeed;
@@ -97,19 +93,22 @@ export function Movement(player, massShopContainer) {
         for(let index = 0; index < massShopContainer.children.length; index++) {
             massShopContainer.children[index].position.x += movementSpeed;
         }
-
     }
 }
 
-function DeclareMovementLimits() {
+function CheckClosestElement(playerPosition){
+
+}
+
+function DeclareMovementLimits(playerWidth) {
 
     if(window.innerWidth/2 + movementLimit2 < window.innerWidth){
 
-        rightLimit = (window.innerWidth/2 +movementLimit2)- 100; //sets limit to spawn pos + limit var minus the character width to it wont go off screen
+        rightLimit = (window.innerWidth/2 +movementLimit2)- playerWidth; //sets limit to spawn pos + limit var minus the character width to it wont go off screen
         leftLimit = (window.innerWidth/2 -movementLimit2);
 
     }else{
-        rightLimit = window.innerWidth - 100 - movementScreenLimitBuffer //limits the movement to the screen, minus the width of the character and a buffer
+        rightLimit = window.innerWidth - playerWidth - movementScreenLimitBuffer //limits the movement to the screen, minus the width of the character and a buffer
         leftLimit = 0 + movementScreenLimitBuffer
     }
     
