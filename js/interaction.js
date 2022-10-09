@@ -10,15 +10,6 @@ export function Proximity_Interaction(player, massShopContainer, debugContainer)
 
     let interactableElementContainer = FindClosest(player.position.x, massShopContainer);
 
-    // interactableElementContainer.position.y = 100;
-
-    console.log(interactableElementContainer.position.x);
-
-
-    // let interactableElementContainer = massShopContainer.getChildAt(1)
-
-    // console.log(Math.abs(player.position.x - massShopContainer.getChildAt(0).position.x))
-
     if (true){ //debug lines
         const debugLines = new PIXI.Graphics();
 
@@ -38,14 +29,12 @@ export function Proximity_Interaction(player, massShopContainer, debugContainer)
 
     }
 
-    // let text = Generate_Shop_Text(interactableElementContainer);
-    let text = new PIXI.Text("Shop Interaction Available");
+    let text = new PIXI.Text(interactableElementContainer.info.name, {fontFamily:'Silkscreen', fill: 0x272223 });
 
-    if(
-        player.position.x - interactionLimit + player.width/2 < interactableElementContainer.position.x &&
-        player.position.x + interactionLimit + player.width/2 > interactableElementContainer.position.x 
+    if( //if players interaction radius is in range of shop do something
+        player.position.x - interactionLimit + player.width/2 < interactableElementContainer.position.x + interactableElementContainer.width/2  &&
+        player.position.x + interactionLimit + player.width/2 > interactableElementContainer.position.x + interactableElementContainer.width/2 
     ){
-        // console.log("interactable");
         interactableElementContainer.addChild(text);
 
         text.position.y -= 50;
@@ -68,8 +57,8 @@ function FindClosest(targetNumber, massShopContainer) {
         if (newdiff < difference) {
             difference = newdiff;
             current = massShopContainer.children[val];
+            
         }
     }   
-    
     return current;
 }

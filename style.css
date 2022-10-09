@@ -4,8 +4,8 @@
     margin: 0;
     padding: 0;
     font-family: Silkscreen;
-
-
+    color: #272223;
+    font-weight: 400;
 }
 
 html{
@@ -28,23 +28,4 @@ canvas{
     flex-direction: column;
     align-items: center;
     margin: auto;
-}
-
-.title-text{
-    font-size: 5rem;
-    color: #f68e56;
-    text-align: center;
-    margin-bottom: 2rem;
-    margin-top: 2rem;
-}
-
-.main-button{
-    background-color: transparent;
-    border-style: solid;
-    border-width: 0.5rem;
-    border-color: #acd373;
-    color: #f26c4f;
-    font-size: 3rem;
-    width: 15%;
-    height: 5rem;
 }

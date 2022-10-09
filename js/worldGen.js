@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js'
 
-
 export function Init(foregroundContainer, groundLevel){
 
     const ground = new PIXI.Graphics();
@@ -28,6 +27,8 @@ export function Init(foregroundContainer, groundLevel){
 
         shopContainer.position.x = 100 * index * 5
         shopContainer.position.y = window.innerHeight - 250 - groundLevel
+
+        shopContainer.info = shopData[index];
     }
 
     window.addEventListener('resize', () => {
